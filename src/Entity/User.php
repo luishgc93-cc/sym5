@@ -3,13 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
- * User
+ * Users
  *
  * @ORM\Table(name="users")
  * @ORM\Entity
@@ -67,17 +64,15 @@ class User
      */
     private $createdAt;
 
-
     /**
-    * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="user")
+    * @ORM\OneTomany(targetEntity="App\Entity\Task", mappedBy="user")
     */
 
     private $tasks;
+
     public function __construct(){
     	$this->tasks = new ArrayCollection();
     }
-
-
 
 
 
@@ -159,9 +154,6 @@ class User
     }
 
 
-
-
-
     /**
     * @return Collection|Task[]
     */
@@ -170,8 +162,6 @@ class User
     {
     	return $this->tasks;
     }
-
-
 
 
 }
