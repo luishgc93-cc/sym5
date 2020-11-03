@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Entity;
-
+use Doctrine\Common\Collections\ArrayCollections;
+use Doctrine\Common\Collections\Collections;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

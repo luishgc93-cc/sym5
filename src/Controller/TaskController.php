@@ -17,7 +17,7 @@ class TaskController extends AbstractController
 
 
     	foreach($tasks as $task){
-    		echo $task->getTitle()."<br>";
+    		echo $task->getUser()->getEmail(). ' : '. $task->getTitle()."<br>";
     	}
 
         return $this->render('task/index.html.twig', [
