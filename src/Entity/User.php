@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Entity;
-
-use Doctrine\Common\Collections\ArrayCollection; 
-use Doctrine\Common\Collections\Collections;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Users
+ * User
  *
  * @ORM\Table(name="users")
  * @ORM\Entity
@@ -36,6 +35,8 @@ class User implements UserInterface
      * @var string|null
      *
      * @ORM\Column(name="name", type="string", length=100, nullable=true)
+	 * @Assert\NotBlank
+	 * @Assert\Regex("/[a-zA-Z ]+/")
      */
     private $name;
 
@@ -43,6 +44,8 @@ class User implements UserInterface
      * @var string|null
      *
      * @ORM\Column(name="surname", type="string", length=200, nullable=true)
+	 * @Assert\NotBlank
+	 * @Assert\Regex("/[a-zA-Z ]+/")
      */
     private $surname;
 
@@ -50,6 +53,11 @@ class User implements UserInterface
      * @var string|null
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
+	 * @Assert\NotBlank
+	 * @Assert\Email(
+	 *		message = "El email '{{ value }}' no es valido",
+	 *		checkMX = true
+	 * )
      */
     private $email;
 
@@ -57,6 +65,7 @@ class User implements UserInterface
      * @var string|null
      *
      * @ORM\Column(name="password", type="string", length=255, nullable=true)
+	 * @Assert\NotBlank
      */
     private $password;
 
@@ -66,18 +75,15 @@ class User implements UserInterface
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt;
-
-    /**
-    * @ORM\OneTomany(targetEntity="App\Entity\Task", mappedBy="user")
-    */
-
-    private $tasks;
-
-    public function __construct(){
-    	$this->tasks = new ArrayCollection();
-    }
-
-
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="user")
+	 */
+	private $tasks;
+	
+	public function __construct(){
+		$this->tasks = new ArrayCollection();
+	}
 
     public function getId(): ?int
     {
@@ -156,35 +162,26 @@ class User implements UserInterface
         return $this;
     }
 
-
-    /**
-    * @return Collection|Task[]
-    */
-
-    public function getTasks(): Collection
-    {
-    	return $this->tasks;
-    }
-
-
-    public function getUsername(){
-        return $this->email;
-    }
-
-    public function getSalt(){
-        return null;
-    }
-
-
-    public function getRoles(){
-        return array('ROLE_USER');
-
-
-    }
-
-    public function eraseCredentials(){
-        
-    }
-
+	/**
+	 * @return Collection|Task[]
+	 */
+	public function getTasks(): Collection
+	{
+		return $this->tasks;
+	}
+	
+	public function getUsername(){
+		return $this->email;
+	}
+	
+	public function getSalt(){
+		return null;
+	}
+	
+	public function getRoles(){
+		return array('ROLE_USER');
+	}
+	
+	public function eraseCredentials(){}
 
 }

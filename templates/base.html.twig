@@ -3,9 +3,40 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
+
+        {% endblock %}
     </head>
     <body>
+    	{%block header%}
+   <div id="header">
+    		<h1>Tareas</h1>
+    		<ul id="menu">
+    			<li> <a href="{{ path('tasks') }}">Inicio</a></li>
+                {% if app.user %}
+
+                <li ><a  href="{{ path('tasks') }}">Tareas</a> </li>
+                <li ><a  href="{{ path('my_tasks') }}">Mis Tareas</a> </li>
+
+                <li ><a  href="{{ path('task_creation') }}">Crear Tareas</a> </li>
+
+                <li class="right"><a href="{{ path('logout') }}">Cerrar Sesion</a> </li>                
+                <li class="right"><a href=""> {{ app.user.name ~ '' ~ app.user.surname}} </a> </li>
+
+
+
+                {% else %}
+                <li> <a href="{{ path('login') }}">Login</a> </li>
+                <li> <a href="{{ path('register') }}">Registro</a></li>
+                {% endif %}
+            
+
+
+
+    		</ul>
+</div>
+    	{%endblock%}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

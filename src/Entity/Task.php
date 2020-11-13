@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Entity;
-use Doctrine\Common\Collections\ArrayCollections;
-use Doctrine\Common\Collections\Collections;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Tasks
+ * Task
  *
  * @ORM\Table(name="tasks", indexes={@ORM\Index(name="fk_task_user", columns={"user_id"})})
  * @ORM\Entity
@@ -58,7 +57,7 @@ class Task
     private $createdAt;
 
     /**
-     * @var \Users
+     * @var \User
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tasks")
      * @ORM\JoinColumns({
@@ -132,12 +131,12 @@ class Task
         return $this;
     }
 
-    public function getUser(): ?Users
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?Users $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 

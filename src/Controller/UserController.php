@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Entity\User;
 use App\Form\RegisterType;
 
@@ -24,16 +24,22 @@ class UserController extends AbstractController
         //rellenar el objeto con los datos del formulario
         $form->handleRequest($request);
         //comprobando si el formulario se ha enviado
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
             //modificando objeto para guardarlo
             $user->setRole('ROLE_USER');
-            $user->setCreatedAt();
-            $date_now =  (new \DateTime())->format('d-m-Y H:i:s');
+            $user->setCreatedAt(new \DateTime('now'));
+
+
             //cifranco la contraseña
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
 
-            var_dump($user);
+           	// guardar usuario
+           	$em = $this->getDoctrine()->getManager();
+           	$em->persist($user);
+           	$em->flush();
+
+           	return $this->redirectToRoute('tasks');
 
 
         }
@@ -43,5 +49,17 @@ class UserController extends AbstractController
         return $this->render('user/register.html.twig', [
         	'form' => $form->createView()
         ]);
+    }
+
+
+    public function login(AuthenticationUtils $autenticationUtils){
+        $error = $autenticationUtils->getLastAuthenticationError();
+        
+        $lastUsername = $autenticationUtils->getLastUsername();
+        
+        return $this->render('user/login.html.twig', array(
+            'error' => $error,
+            'last_username' => $lastUsername
+        ));
     }
 }
