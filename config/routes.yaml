@@ -29,6 +29,9 @@ register:
 login:
     path: /
     controller: App\Controller\UserController::login
+modify:
+    path: /modify
+    controller: App\Controller\UserController::Modify
     
 logout:
     path: /logout

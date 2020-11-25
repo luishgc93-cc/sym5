@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Entity\User;
 use App\Form\RegisterType;
+use App\Form\Modify;
 
 class UserController extends AbstractController
 {
@@ -62,4 +63,18 @@ class UserController extends AbstractController
             'last_username' => $lastUsername
         ));
     }
+
+    public function modify(Request $request) 
+    {
+        $user = new user();
+        $form = $this->createForm(Modify::class, $user);
+
+        return $this->render('user/modify.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
+
 }
+
+
