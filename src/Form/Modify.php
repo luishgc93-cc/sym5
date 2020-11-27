@@ -29,7 +29,7 @@ class Modify extends AbstractType{
 
 
                     ->add('submit', SubmitType::class, array(
-                                'label' => 'Registrarse'
+                                'label' => 'Modificar Perfil'
                             ));
 
 

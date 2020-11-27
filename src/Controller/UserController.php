@@ -66,7 +66,7 @@ class UserController extends AbstractController
         ));
     }
 
-    public function modify(Request $request, UserInterface $user) 
+    public function modify(Request $request, User $user, UserPasswordEncoderInterface $encoder) 
     {
         $form = $this->createForm(Modify::class, $user);
         
@@ -74,7 +74,9 @@ class UserController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
             //$task->setUser($user);
-            $user->setRole('ROLE_USER');           
+            $user->setRole('ROLE_USER');     
+            $encoded = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($encoded);            
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
