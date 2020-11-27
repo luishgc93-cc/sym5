@@ -11,6 +11,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Entity\User;
 use App\Form\RegisterType;
 use App\Form\Modify;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UserController extends AbstractController
 {
@@ -64,17 +66,36 @@ class UserController extends AbstractController
         ));
     }
 
-    public function modify(Request $request) 
+    public function modify(Request $request, UserInterface $user) 
     {
-        $user = new user();
         $form = $this->createForm(Modify::class, $user);
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            //$task->setUser($user);
+            $user->setRole('ROLE_USER');           
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            
+            return $this->redirect($this->generateUrl('modify', ['id' => $user->getId()]));
+        }
+
 
         return $this->render('user/modify.html.twig',[
+            'edit' => true,
             'form' => $form->createView()
         ]);
     }
 
+    
+    
+    
+    
+    
 
+    
 }
 
 

@@ -30,8 +30,8 @@ login:
     path: /
     controller: App\Controller\UserController::login
 modify:
-    path: /modify
+    path: /modificar-perfil/{id}
     controller: App\Controller\UserController::Modify
-    
+     
 logout:
     path: /logout

@@ -21,9 +21,9 @@
 
                 <li ><a  href="{{ path('task_creation') }}">Crear Tareas</a> </li>
 
-                <li class="right"><a href="{{ path('logout') }}">Cerrar Sesion</a> </li>                
-                <li class="right"><a href="{{ path('modify') }}"> {{ app.user.name ~ '' ~ app.user.surname}} </a> </li>
+                        <li class="right"><a href="{{ path('logout') }}">Cerrar Sesion</a> </li>              
 
+                <li class="right"><a href="/modificar-perfil/{{app.user.id}}"> Perfil </a> </li>
 
 
                 {% else %}
@@ -39,5 +39,7 @@
     	{%endblock%}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+
+                
     </body>
 </html>

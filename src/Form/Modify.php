@@ -22,10 +22,15 @@ class Modify extends AbstractType{
                             'label' => 'Correo Electronico'
                         ))
 
-                ->add('submit', SubmitType::class, array(
+
+                    ->add('password', TextType::class, array(
+                                'label' => 'Contraseña'
+                            ))
+
+
+                    ->add('submit', SubmitType::class, array(
                                 'label' => 'Registrarse'
                             ));
-
 
 
     }
