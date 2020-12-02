@@ -9,10 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Entity\User;
+use App\Entity\Task;
 use App\Form\RegisterType;
 use App\Form\Modify;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use App\Repository\UserRepository;
 
 class UserController extends AbstractController
 {
@@ -94,10 +96,36 @@ class UserController extends AbstractController
     
     
     
-    
+    public function usuarios (UserInterface $user){
+        
+        
+                        if(!$user || $user->getRole() !== 'ROLE_ADMIN'){
+            return $this->redirectToRoute('tasks');
+        }
+                          
+        $em = $this->getDoctrine()->getManager();
+    	$task_repo = $this->getDoctrine()->getRepository(User::class);
+    	$tasks = $task_repo->findAll();
+
+
+        return $this->render('user/listado.html.twig', [
+            'tasks' => $tasks
+        ]);
+         
+    }
     
 
-    
+       public function usuarios_delete(UserInterface $user){
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+
+
+          return $this->redirectToRoute('usuarios');
+
+    } 
 }
 
 

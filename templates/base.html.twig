@@ -20,6 +20,16 @@
                 <li ><a  href="{{ path('my_tasks') }}">Mis Tareas</a> </li>
 
                 <li ><a  href="{{ path('task_creation') }}">Crear Tareas</a> </li>
+                
+                
+                
+   		{% if app.user.role == 'ROLE_ADMIN'%}
+                    <li ><a  href="{{ path('usuarios') }}">Ver Usuarios</a> </li>
+		{%endif%}             
+                
+                
+                
+                
 
                         <li class="right"><a href="{{ path('logout') }}">Cerrar Sesion</a> </li>              
 

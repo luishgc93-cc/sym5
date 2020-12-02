@@ -183,5 +183,17 @@ class User implements UserInterface
 	}
 	
 	public function eraseCredentials(){}
+        
+        
+        
+        
+        
+        	public function getUsers(){
+		return $this->id;
+	}
+        
+        
+        
+        
 
 }

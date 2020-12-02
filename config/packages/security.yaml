@@ -43,3 +43,4 @@ security:
          - { path: ^/mis-tareas, roles: ROLE_USER }
          - { path: ^/editar-tarea, roles: ROLE_USER }
          - { path: ^/borrar-tarea, roles: ROLE_USER }
+         - { path: ^/usuarios, roles: ROLE_USER }

@@ -32,6 +32,17 @@ login:
 modify:
     path: /modificar-perfil/{id}
     controller: App\Controller\UserController::Modify
+
+usuarios:
+    path: /usuarios
+    controller: App\Controller\UserController::usuarios    
+     
+     
+usuarios_delete:
+    path: /usuarios-delete/{id}
+    controller: App\Controller\UserController::usuarios_delete         
+     
+     
      
 logout:
     path: /logout

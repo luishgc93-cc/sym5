@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ver Usuarios{% endblock %}
+
+{% block body %}    
+    
+<div class="example-wrapper">
+    
+<table>
+    <tr>
+        <th> ID </th> 	
+    	<th> Nombre </th> 	
+    	<th> Apellidos </th>
+    	<th> Email </th>
+    	<th> Acciones </th>
+
+    </tr>
+
+{% for task in tasks %}
+
+	<tr>
+                <td> {{ task.id }} 					</td>
+		<td> {{ task.name }} 					</td>
+		<td>{{ task.surname }} 					</td>
+		<td> {{ task.email }} 					</td>
+		<td class="buttons">
+		<a href="" class="btn-show">Ver</a>	
+		<a href="{{ path('usuarios_delete', {'id':task.id})  }}" class="btn-delete">Eliminar </a>	
+	</tr>
+{% endfor %}
+
+
+    </table>
+</div>
+
+{% endblock %}
