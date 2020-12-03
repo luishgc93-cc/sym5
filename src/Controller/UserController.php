@@ -35,7 +35,7 @@ class UserController extends AbstractController
             $user->setCreatedAt(new \DateTime('now'));
 
 
-            //cifranco la contraseÃ±a
+            //cifranco la contraseña
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
 
@@ -99,7 +99,7 @@ class UserController extends AbstractController
     public function usuarios (UserInterface $user){
         
         
-                        if(!$user || $user->getRole() !== 'ROLE_ADMIN'){
+        if(!$user || $user->getRole() !== 'ROLE_ADMIN'){
             return $this->redirectToRoute('tasks');
         }
                           
@@ -127,5 +127,3 @@ class UserController extends AbstractController
 
     } 
 }
-
-
