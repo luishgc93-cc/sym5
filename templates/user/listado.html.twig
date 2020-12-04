@@ -24,7 +24,7 @@
 		<td>{{ task.surname }} 					</td>
 		<td> {{ task.email }} 					</td>
 		<td class="buttons">
-		<a href="" class="btn-show">Ver</a>	
+		<a href="{{ path('usuarios_ver', {'id':task.id})  }}" class="btn-show">Ver</a>	
 		<a href="{{ path('usuarios_delete', {'id':task.id})  }}" class="btn-delete">Eliminar </a>	
 	</tr>
 {% endfor %}

@@ -21,6 +21,8 @@ security:
                 login_path: login
                 check_path: login
                 provider: proveedor
+                default_target_path: tasks
+
                 
             logout:
                 path: /logout

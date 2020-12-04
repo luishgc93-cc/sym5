@@ -43,6 +43,9 @@ usuarios_delete:
     controller: App\Controller\UserController::usuarios_delete         
      
      
-     
+usuarios_ver:
+    path: /usuarios-ver/{id}
+    controller: App\Controller\UserController::usuarios_ver     
+    
 logout:
     path: /logout

@@ -126,4 +126,18 @@ class UserController extends AbstractController
           return $this->redirectToRoute('usuarios');
 
     } 
+    
+    
+    
+    
+        public function usuarios_ver(UserInterface $user){
+            
+        if(!$user || $user->getRole() !== 'ROLE_ADMIN'){
+            return $this->redirectToRoute('tasks');
+        }
+
+        return $this->render('user/ver.html.twig',[
+            'user' =>$user
+        ]);
+    }
 }
