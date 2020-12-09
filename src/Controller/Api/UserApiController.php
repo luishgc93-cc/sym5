@@ -19,7 +19,7 @@ class UserApiController extends AbstractFOSRestController
      * @Rest\Get(path="/usuarios")
      * @Rest\View(serializerGroups={"user"}, serializerEnableMaxDepthChecks=true)
      */
-    public function usuariosapi (UserInterface $user){
+    public function usuariosapi (){
         
         
    $em = $this->getDoctrine()->getManager();
@@ -34,7 +34,7 @@ class UserApiController extends AbstractFOSRestController
      * @Rest\Get(path="/usuarios/{id}", requirements={"id"="\d+"})
      * @Rest\View(serializerGroups={"user"}, serializerEnableMaxDepthChecks=true)
      */
-    public function get_usuarios(int $id, UserInterface $user) {
+    public function get_usuarios(int $id) {
         
         
      $em = $this->getDoctrine()->getManager();
