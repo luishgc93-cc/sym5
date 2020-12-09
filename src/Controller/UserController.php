@@ -138,6 +138,15 @@ class UserController extends AbstractController
 
         return $this->render('user/ver.html.twig',[
             'user' =>$user
+               
+                
         ]);
     }
+    
+
+    
+  
+
+    
+    
 }
