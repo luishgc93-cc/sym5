@@ -22,10 +22,30 @@ class UserApiController extends AbstractFOSRestController
     public function usuariosapi (UserInterface $user){
         
         
-    return $user->findAll();
+   $em = $this->getDoctrine()->getManager();
+    	$task_repo = $this->getDoctrine()->getRepository(User::class);
+    	$tasks = $task_repo->findAll();
 
-
-         
+         return $tasks;
     }
 
+    
+     /**
+     * @Rest\Get(path="/usuarios/{id}", requirements={"id"="\d+"})
+     * @Rest\View(serializerGroups={"user"}, serializerEnableMaxDepthChecks=true)
+     */
+    public function get_usuarios(int $id, UserInterface $user) {
+        
+        
+     $em = $this->getDoctrine()->getManager();
+    	$task_repo = $this->getDoctrine()->getRepository(User::class);
+    	$tasks = $task_repo->find($id);
+        
+        if (!$tasks) {
+            return View::create('USUARIO NO ENCONTRADO', Response::HTTP_BAD_REQUEST);
+        }
+        return $tasks;
+    }   
+    
+    
 }
