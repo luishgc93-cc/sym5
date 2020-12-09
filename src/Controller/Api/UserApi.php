@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\User;
+use App\Repository\UserRepository;
 
 class UserApi extends AbstractFOSRestController
 {
