@@ -28,6 +28,14 @@ security:
                 path: /logout
                 target: /
 
+
+        api:
+            pattern: ^/api
+            anonymous: lazy
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\TokenAuthenticator
             # activate different ways to authenticate
 
             # http_basic: true
@@ -45,4 +53,4 @@ security:
          - { path: ^/mis-tareas, roles: ROLE_USER }
          - { path: ^/editar-tarea, roles: ROLE_USER }
          - { path: ^/borrar-tarea, roles: ROLE_USER }
-         - { path: ^/usuarios, roles: ROLE_USER }
+         - { path: ^/api, roles: ROLE_USER }
