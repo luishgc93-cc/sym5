@@ -13,13 +13,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\User;
 use App\Repository\UserRepository;
 
-class UserApi extends AbstractFOSRestController
+class UserApiController extends AbstractFOSRestController
 {
     /**
      * @Rest\Get(path="/usuarios")
      * @Rest\View(serializerGroups={"user"}, serializerEnableMaxDepthChecks=true)
      */
-    public function usuariosapi (User $user){
+    public function usuariosapi (UserInterface $user){
         
         
     return $user->findAll();
