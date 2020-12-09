@@ -10,20 +10,18 @@ use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Entity\User;
 
-class ApiUserController extends AbstractFOSRestController
+class UserApi extends AbstractFOSRestController
 {
     /**
-     * @Rest\Get(path="/users")
-     * @Rest\View(serializerGroups={"usuario"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\Get(path="/usuarios")
+     * @Rest\View(serializerGroups={"user"}, serializerEnableMaxDepthChecks=true)
      */
-    public function usuarios (UserInterface $user){
+    public function usuariosapi (User $user){
         
         
-                          
-        $em = $this->getDoctrine()->getManager();
-    	$task_repo = $this->getDoctrine()->getRepository(User::class);
-    	$tasks = $task_repo->findAll();
+    return $user->findAll();
 
 
          
