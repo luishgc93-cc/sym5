@@ -115,7 +115,7 @@ class UserController extends AbstractController
     }
     
 
-       public function usuarios_delete(UserInterface $user){
+       public function usuarios_delete(User $user){
 
 
         $em = $this->getDoctrine()->getManager();
@@ -125,16 +125,14 @@ class UserController extends AbstractController
 
           return $this->redirectToRoute('usuarios');
 
+          // IMPORTANTE, "ON DELETE CASCADE" sin eso no podriamos borrar los usuarios ya que estan relacionados con las tareas, si añadimos ese codigo en el sql nos borra el usuario y sus tareas.
+
     } 
     
     
     
     
-        public function usuarios_ver(UserInterface $user){
-            
-        if(!$user || $user->getRole() !== 'ROLE_ADMIN'){
-            return $this->redirectToRoute('tasks');
-        }
+        public function usuarios_ver(User $user){
 
         return $this->render('user/ver.html.twig',[
             'user' =>$user

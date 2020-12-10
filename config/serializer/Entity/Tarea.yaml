@@ -1,0 +1,15 @@
+App\Entity\Task:
+    attributes:
+        id:
+            groups: ['task']
+        title:
+            groups: ['task']
+        content:
+            groups: ['task']
+        priority:
+            groups: ['task']
+        hours:
+            groups: ['task']    
+        created_at:
+            groups: ['task']        
+       
