@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}Correo electrónico de restablecimiento de contraseña enviado{% endblock %}
 
 {% block body %}
-    <p>An email has been sent that contains a link that you can click to reset your password. This link will expire in {{ tokenLifetime|date('g') }} hour(s).</p>
-    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+<div class="example-wrapper">
+
+    <p>Se ha enviado un correo electrónico que contiene un enlace en el que puede hacer clic para restablecer su contraseña. Este enlace caducará en{{ tokenLifetime|date('g') }} hora(s).</p>
+    <p>Si no recibe un correo electrónico, consulte su carpeta de correo no deseado o <a href="{{ path('app_forgot_password_request') }}">inténtelo de nuevo.</a>.</p>
+    </div>
+
 {% endblock %}

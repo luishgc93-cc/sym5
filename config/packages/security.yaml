@@ -58,7 +58,3 @@ security:
          - { path: ^/api, roles: ROLE_ADMIN }
 
 
-# config/packages/mailer.yaml
-framework:
-    mailer:
-        dsn: '%env(MAILER_DSN)%'
