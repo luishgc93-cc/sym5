@@ -27,7 +27,13 @@ security:
             logout:
                 path: /logout
                 target: /
-
+        api:
+            pattern: ^/api
+            anonymous: lazy
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\TokenAuthenticator
             # activate different ways to authenticate
 
             # http_basic: true
