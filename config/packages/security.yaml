@@ -1,5 +1,5 @@
 security:
-    encoders:
+    encoders:      
         App\Entity\User:
             algorithm: bcrypt
             cost: 4
@@ -11,6 +11,9 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+
+
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -21,19 +24,12 @@ security:
                 login_path: login
                 check_path: login
                 provider: proveedor
-                default_target_path: tasks
-
-                
+                default_target_path: tasks              
             logout:
                 path: /logout
                 target: /
-        api:
-            pattern: ^/api
-            anonymous: lazy
-            provider: app_user_provider
-            guard:
-                authenticators:
-                    - App\Security\TokenAuthenticator
+
+           
             # activate different ways to authenticate
 
             # http_basic: true
@@ -52,3 +48,7 @@ security:
          - { path: ^/editar-tarea, roles: ROLE_USER }
          - { path: ^/borrar-tarea, roles: ROLE_USER }
          - { path: ^/usuarios, roles: ROLE_USER }
+# config/packages/mailer.yaml
+framework:
+    mailer:
+        dsn: '%env(MAILER_DSN)%'

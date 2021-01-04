@@ -47,5 +47,15 @@ usuarios_ver:
     path: /ver-usuario/{id}
     controller: App\Controller\UserController::usuarios_ver     
     
+
+cuenta-cambiar:
+    path: cambiar
+    controller: App\Controller\ResetPasswordController::reset
+
+
+cuenta-recordar:
+    path: recordar
+    controller: App\Controller\ResetPasswordController::request
+
 logout:
     path: /logout
