@@ -33,6 +33,10 @@ modify:
     path: /modificar-perfil/{id}
     controller: App\Controller\UserController::Modify
 
+contraseña:
+    path: /modificar-contrasena
+    controller: App\Controller\Contraseña::reset
+
 usuarios:
     path: /usuarios
     controller: App\Controller\UserController::usuarios    
