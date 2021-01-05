@@ -19,6 +19,9 @@ use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
+use Symfony\Component\Mime\Email;
+
 /**
  * @Route("/reset-password")
  */
@@ -38,7 +41,7 @@ class Contraseña extends AbstractController
      *
      * @Route("/modificar", name="app_reset_password")
      */
-    public function reset(Request $request, UserPasswordEncoderInterface $passwordEncoder, UserInterface $user): Response
+    public function reset(MailerInterface $mailer, Request $request, UserPasswordEncoderInterface $passwordEncoder, UserInterface $user): Response
     {
 
 
@@ -47,6 +50,30 @@ class Contraseña extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+
+            $this->setCanCheckEmailInSession(); // SACAMOS EL CORREO DE LA SESION ACTUAL DEL USUARIO, NOS SIRVE PARA ENVIARLE EMAILS POR EJEMPLO
+
+            if (!$user) {
+                return $this->redirectToRoute('app_check_email');
+            }
+
+            $email = (new Email())
+            ->from('contacto@webcaceres.com')
+            ->to($user->getEmail())
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('Contraseña Cambiada')
+            ->text('Contraseña Cambiada')
+            ->html('<p>Se ha cambiado su contraseña desde el panel de control, si usted no ha afectuado dicha opcion, contacte con nuestro soporte informatico en:</p>');
+    
+        $mailer->send($email);
+        
+        
+
             // Encode the plain password, and set it.
             $encodedPassword = $passwordEncoder->encodePassword(
                 $user,
@@ -57,15 +84,21 @@ class Contraseña extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             // The session is cleaned up after the password has been changed.
-            $this->cleanSessionAfterReset();
 
             return $this->redirectToRoute('tasks');
+        
+        
         }
+
+
+
+
 
         return $this->render('reset_password/reset.html.twig', [
             'resetForm' => $form->createView(),
         ]);
+
+
     }
 
-   
 }

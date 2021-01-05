@@ -55,6 +55,7 @@ security:
          - { path: ^/editar-tarea, roles: ROLE_USER }
          - { path: ^/borrar-tarea, roles: ROLE_USER }
          - { path: ^/usuarios, roles: ROLE_USER }
+         - { path: ^//modificar-contrasena, roles: ROLE_USER }         
          - { path: ^/api, roles: ROLE_ADMIN }
 
 

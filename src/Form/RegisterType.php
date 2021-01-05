@@ -23,7 +23,7 @@ class RegisterType extends AbstractType{
                             'label' => 'Correo Electronico'
                         ))
 
-                    ->add('password', TextType::class, array(
+                    ->add('password', PasswordType::class, array(
                                 'label' => 'Contraseña'
                             ))
 
