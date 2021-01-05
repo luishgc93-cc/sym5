@@ -55,6 +55,10 @@ usuarios_editar:
     path: /editar-usuario/{id}
     controller: App\Controller\UserController::usuarios_editar    
 
+usuarios_editar_contraseña:
+    path: /editar-usuario-contrasena/{id}
+    controller: App\Controller\UserController::usuarios_editar_contraseña    
+
 cuenta-cambiar:
     path: cambiar
     controller: App\Controller\ResetPasswordController::reset

@@ -18,6 +18,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use App\Repository\UserRepository;
 
+
+
+
+use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
+use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
+use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\MailerInterface;
+use App\Form\ChangePasswordFormType;
+use App\Form\ResetPasswordRequestFormType;
+
 class UserController extends AbstractController
 {
     /**
@@ -170,4 +181,79 @@ class UserController extends AbstractController
     }
     
     
+
+
+
+    use ResetPasswordControllerTrait;
+
+    private $resetPasswordHelper;
+
+    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper)
+    {
+        $this->resetPasswordHelper = $resetPasswordHelper;
+    }
+
+
+
+    public function usuarios_editar_contraseña(Request $request, UserPasswordEncoderInterface $passwordEncoder, User $user): Response
+    {
+
+
+       // The token is valid; allow the user to change their password.
+        $form = $this->createForm(ChangePasswordFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Encode the plain password, and set it.
+            $encodedPassword = $passwordEncoder->encodePassword(
+                $user,
+                $form->get('plainPassword')->getData()
+            );
+
+            $user->setPassword($encodedPassword);
+            $this->getDoctrine()->getManager()->flush();
+
+            // The session is cleaned up after the password has been changed.
+
+            return $this->redirectToRoute('usuarios');
+        
+        
+        }
+
+
+
+
+
+        return $this->render('reset_password/reset.html.twig', [
+            'resetForm' => $form->createView(),
+        ]);
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

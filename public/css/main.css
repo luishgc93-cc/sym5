@@ -1,5 +1,5 @@
 body{
-    background: white;
+    background-color: whitesmoke;
 }
 
 .clearfix{
@@ -32,7 +32,7 @@ body{
     list-style: none;
     width: 100%;
     height: 50px;
-    background: #eee;
+    background: rgb(255, 255, 255);
     line-height: 50px;
 }
 
