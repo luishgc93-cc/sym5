@@ -10,10 +10,12 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use App\Entity\User;
+
 
 class TokenAuthenticator extends AbstractGuardAuthenticator
 {
-    const TOKEN = 'LIBRARIFY';
+    const TOKEN = 'luis';
 
     /**
      * Called on every request to decide if this authenticator should be

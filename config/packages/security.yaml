@@ -20,6 +20,13 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api:
+            pattern: ^/api
+            anonymous: lazy
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\TokenAuthenticator            
         main:
             anonymous: true
             form_login:
@@ -30,13 +37,7 @@ security:
             logout:
                 path: /logout
                 target: /
-        api:
-            pattern: ^/api
-            anonymous: lazy
-            provider: app_user_provider
-            guard:
-                authenticators:
-                    - App\Security\TokenAuthenticator
+
             # activate different ways to authenticate
 
             # http_basic: true
@@ -55,7 +56,7 @@ security:
          - { path: ^/editar-tarea, roles: ROLE_USER }
          - { path: ^/borrar-tarea, roles: ROLE_USER }
          - { path: ^/usuarios, roles: ROLE_USER }
-         - { path: ^//modificar-contrasena, roles: ROLE_USER }         
-         - { path: ^/api, roles: ROLE_ADMIN }
+         - { path: ^/modificar-contrasena, roles: ROLE_USER }         
+         - { path: ^/api, roles: ROLE_USER }
 
 
