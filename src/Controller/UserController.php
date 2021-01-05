@@ -195,7 +195,7 @@ class UserController extends AbstractController
 
 
 
-    public function usuarios_editar_contraseña(Request $request, UserPasswordEncoderInterface $passwordEncoder, User $user): Response
+    public function usuarios_editar_contraseña(MailerInterface $mailer, Request $request, UserPasswordEncoderInterface $passwordEncoder, User $user): Response
     {
 
 
@@ -204,6 +204,19 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $email = (new Email())
+            ->from('contacto@webcaceres.com')
+            ->to($user->getEmail())
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('Contraseña Cambiada por el soporte informatico')
+            ->text('Contraseña Cambiada por soporte informatico')
+            ->html('<p>Se ha cambiado su contraseña por soporte informática.</p>');
+    
+        $mailer->send($email);
 
             // Encode the plain password, and set it.
             $encodedPassword = $passwordEncoder->encodePassword(
