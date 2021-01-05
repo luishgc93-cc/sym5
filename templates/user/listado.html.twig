@@ -8,6 +8,7 @@
     
 <table>
     <tr>
+	    <th> Rol </th> 	
         <th> ID </th> 	
     	<th> Nombre </th> 	
     	<th> Apellidos </th>
@@ -19,7 +20,8 @@
 {% for task in tasks %}
 
 	<tr>
-                <td> {{ task.id }} 					</td>
+	    <td> {{ task.role }} 					</td>
+        <td> {{ task.id }} 					</td>
 		<td> {{ task.name }} 					</td>
 		<td>{{ task.surname }} 					</td>
 		<td> {{ task.email }} 					</td>
