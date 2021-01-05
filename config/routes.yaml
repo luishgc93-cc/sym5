@@ -51,6 +51,9 @@ usuarios_ver:
     path: /ver-usuario/{id}
     controller: App\Controller\UserController::usuarios_ver     
     
+usuarios_editar:
+    path: /editar-usuario/{id}
+    controller: App\Controller\UserController::usuarios_editar    
 
 cuenta-cambiar:
     path: cambiar

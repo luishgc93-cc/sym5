@@ -12,6 +12,8 @@ use App\Entity\User;
 use App\Entity\Task;
 use App\Form\RegisterType;
 use App\Form\Modify;
+use App\Form\UsuariosEditar;
+
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use App\Repository\UserRepository;
@@ -35,7 +37,7 @@ class UserController extends AbstractController
             $user->setCreatedAt(new \DateTime('now'));
 
 
-            //cifranco la contraseña
+            //cifranco la contraseï¿½a
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
 
@@ -125,7 +127,7 @@ class UserController extends AbstractController
 
           return $this->redirectToRoute('usuarios');
 
-          // IMPORTANTE, "ON DELETE CASCADE" sin eso no podriamos borrar los usuarios ya que estan relacionados con las tareas, si añadimos ese codigo en el sql nos borra el usuario y sus tareas.
+          // IMPORTANTE, "ON DELETE CASCADE" sin eso no podriamos borrar los usuarios ya que estan relacionados con las tareas, si aï¿½adimos ese codigo en el sql nos borra el usuario y sus tareas.
 
     } 
     
@@ -144,7 +146,28 @@ class UserController extends AbstractController
 
     
   
+    public function usuarios_editar(Request $request, User $user, UserPasswordEncoderInterface $encoder) 
+    {
+        $form = $this->createForm(UsuariosEditar::class, $user);
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            //$task->setUser($user);
+           
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            
+            return $this->redirect($this->generateUrl('usuarios_editar', ['id' => $user->getId()]));
+        }
 
+
+        return $this->render('user/usuarios_editar.html.twig',[
+            'edit' => true,
+            'form' => $form->createView()
+        ]);
+    }
     
     
 }
