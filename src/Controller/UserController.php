@@ -32,6 +32,8 @@ use App\Form\ResetPasswordRequestFormType;
 
 use App\Form\Contacto;
 
+use App\Form\TaskType;
+
 
 class UserController extends AbstractController
 {
@@ -289,7 +291,51 @@ class UserController extends AbstractController
            'form' => $form->createView(),
        ]);
 
-
-
    }
+
+   public function asignar_tarea(MailerInterface $mailer, Request $request, User $user){
+    $task = new Task();
+    $form = $this->createForm(TaskType::class, $task);
+    
+    $form->handleRequest($request);
+    
+    if($form->isSubmitted() && $form->isValid()){
+        $task->setCreatedAt(new \Datetime('now'));
+        $task->setUser($user);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($task);
+        $em->flush();
+        
+
+        $email = (new Email())
+        ->from('contacto@webcaceres.com')
+        ->to($user->getEmail())
+        //->cc('cc@example.com')
+        //->bcc('bcc@example.com')
+        //->replyTo('fabien@example.com')
+        //->priority(Email::PRIORITY_HIGH)
+        ->subject('Se le ha asignado una nueva Tarea')
+        ->text('Se le ha asignado una nueva Tarea')
+        ->html('<p>Se le ha asignado una nueva Tarea por Administración, por favor, consulte su tablero</p>');
+
+    $mailer->send($email);
+
+    $this->addFlash('success', 'TAREA ASIGNADA CORRECTAMENTE Y NOTIFICADA');
+
+        return $this->redirect($this->generateUrl('task_detail', ['id' => $task->getId()]));
+    }
+    
+    return $this->render('task/creation.html.twig',[
+        'form' => $form->createView()
+    ]);
+}
+
+
+
+
+
+
+
+
 }

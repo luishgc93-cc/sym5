@@ -72,6 +72,10 @@ contactar:
     path: /contactar/{id}
     controller: App\Controller\UserController::contactar    
 
+asignar_tarea:
+    path: /asignar-tarea/{id}
+    controller: App\Controller\UserController::asignar_tarea    
+
 logout:
     path: /logout
 
