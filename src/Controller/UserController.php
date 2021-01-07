@@ -89,13 +89,14 @@ class UserController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
             //$task->setUser($user);
-            $user->setRole('ROLE_USER');     
-            $encoded = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($encoded);            
+           // $user->setRole('ROLE_USER');     
+          //  $encoded = $encoder->encodePassword($user, $user->getPassword());
+            //$user->setPassword($encoded);            
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            
+            $this->addFlash('success', 'Perfil Modificado Correctamente');
+
             return $this->redirect($this->generateUrl('modify', ['id' => $user->getId()]));
         }
 
@@ -135,6 +136,7 @@ class UserController extends AbstractController
         $em->remove($user);
         $em->flush();
 
+        $this->addFlash('success', 'USUARIO BORRADO CORRECTAMENTE');
 
           return $this->redirectToRoute('usuarios');
 
@@ -169,7 +171,8 @@ class UserController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            
+            $this->addFlash('success', 'USUARIO EDITADO CORRECTAMENTE');
+
             return $this->redirect($this->generateUrl('usuarios_editar', ['id' => $user->getId()]));
         }
 
@@ -228,6 +231,7 @@ class UserController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             // The session is cleaned up after the password has been changed.
+            $this->addFlash('success', 'CONTRASEÑA RESTABLECIDA CORRECTAMENTE');
 
             return $this->redirectToRoute('usuarios');
         

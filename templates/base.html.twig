@@ -43,6 +43,12 @@
 
 
     		</ul>
+
+        {% for message in app.flashes('success') %}
+            <div class="mensaje">
+                {{ message }}
+            </div>
+        {% endfor %}
 </div>
     	{%endblock%}
         {% block body %}{% endblock %}

@@ -147,3 +147,13 @@ table td{
 .data-task{
     color:gray;
 }
+
+
+
+.mensaje {
+    text-decoration: none;
+    border: 1px solid green;
+    padding: 10px;
+    color: white;
+    background: #00AA33;
+}
