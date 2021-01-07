@@ -68,10 +68,16 @@ cuenta-recordar:
     path: recordar
     controller: App\Controller\ResetPasswordController::request
 
+contactar:
+    path: /contactar/{id}
+    controller: App\Controller\UserController::contactar    
+
 logout:
     path: /logout
 
 MailerController:
     path: /email
     controller: App\Controller\MailerController::sendEmail
+
+
 

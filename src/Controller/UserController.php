@@ -29,6 +29,10 @@ use Symfony\Component\Mailer\MailerInterface;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
 
+
+use App\Form\Contacto;
+
+
 class UserController extends AbstractController
 {
     /**
@@ -237,11 +241,6 @@ class UserController extends AbstractController
         
         
         }
-
-
-
-
-
         return $this->render('reset_password/reset.html.twig', [
             'resetForm' => $form->createView(),
         ]);
@@ -254,23 +253,43 @@ class UserController extends AbstractController
 
 
 
+    public function contactar(MailerInterface $mailer, Request $request, UserPasswordEncoderInterface $passwordEncoder, User $user): Response
+    {
 
 
 
+       // The token is valid; allow the user to change their password.
+       $form = $this->createForm(Contacto::class);
+       $form->handleRequest($request);
+
+       if ($form->isSubmitted() && $form->isValid()) {
+        $contactFormData = $form->getData();
+
+           $email = (new Email())
+           ->from('contacto@webcaceres.com')
+           ->to($user->getEmail())
+           //->cc('cc@example.com')
+           //->bcc('bcc@example.com')
+           //->replyTo('fabien@example.com')
+           //->priority(Email::PRIORITY_HIGH)
+           ->subject($contactFormData['asunto'],
+           'text/plain')
+           ->text($contactFormData['mensaje'],
+           'text/plain');
+   
+       $mailer->send($email);
+           // The session is cleaned up after the password has been changed.
+           $this->addFlash('success', 'EMAIL ENVIADO CORRECTAMENTE');
+
+           return $this->redirectToRoute('usuarios');
+       
+       
+       }
+       return $this->render('user/contactar.html.twig', [
+           'form' => $form->createView(),
+       ]);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+   }
 }
