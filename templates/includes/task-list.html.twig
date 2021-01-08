@@ -2,6 +2,8 @@
 
     <table>
     <tr>
+    	<th> Usuario </th> 	
+
     	<th> Tarea </th> 	
     	<th> Prioridad </th>
     	<th> Horas presupuestadas </th>
@@ -13,6 +15,16 @@
 {% for task in tasks %}
 
 	<tr>
+		<td>
+		{% for user in users %}
+
+		{% if user.id ==  task.user_id %}
+		 {{ user.email }}
+		 {% endif%}
+
+		{% endfor %}	
+		  </td>
+
 		<td> {{ task.title }} </td>
 		<td>
 

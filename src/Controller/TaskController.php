@@ -21,9 +21,13 @@ class TaskController extends AbstractController
     	$task_repo = $this->getDoctrine()->getRepository(Task::class);
     	$tasks = $task_repo->findBy([], ['id' =>'DESC']);
 
-
+    	$task_repo2 = $this->getDoctrine()->getRepository(User::class);
+        $tasks2 = $task_repo2->findBy([], ['id' =>'DESC']);
+        
         return $this->render('task/index.html.twig', [
-            'tasks' => $tasks
+            'tasks' => $tasks,
+            'users' => $tasks2
+
         ]);
     }
 

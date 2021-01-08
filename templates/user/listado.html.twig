@@ -20,7 +20,13 @@
 {% for task in tasks %}
 
 	<tr>
-	    <td> {{ task.role }} 					</td>
+	    <td>
+		 {% if task.role == 'ROLE_ADMIN' %}
+		 {{ 'Administrador' }}
+		 {% endif%}	
+		 		 {% if task.role == 'ROLE_USER' %}
+		 {{ 'Usuario' }}
+		 {% endif%}					</td>
         <td> {{ task.id }} 					</td>
 		<td> {{ task.name }} 					</td>
 		<td>{{ task.surname }} 					</td>

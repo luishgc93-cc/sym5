@@ -73,6 +73,13 @@ class Task
      */
     private $estado;    
 
+    /**
+     * @var \User_Id|null
+     *
+     * @ORM\Column(name="user_id", type="string", nullable=true)
+     */
+    private $user_id;        
+
     public function getId(): ?int
     {
         return $this->id;
@@ -161,4 +168,23 @@ class Task
 
         return $this;
     }
+
+
+
+
+
+    public function getUser_Id(): ?string
+    {
+        return $this->user_id;
+    }
+
+    public function setUser_Id(?string $user_id): self
+    {
+        $this->user_id = $user_id;
+
+        return $this;
+    }
+
+
+
 }
