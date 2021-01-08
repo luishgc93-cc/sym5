@@ -2,8 +2,6 @@
 
     <table>
     <tr>
-    	<th> Usuario </th> 	
-
     	<th> Tarea </th> 	
     	<th> Prioridad </th>
     	<th> Horas presupuestadas </th>
@@ -15,16 +13,6 @@
 {% for task in tasks %}
 
 	<tr>
-		<td>
-		{% for user in users %}
-
-		{% if user.id ==  task.user_id %}
-		 {{ user.email }}
-		 {% endif%}
-				{% endfor %}	
-
-		  </td>
-
 		<td> {{ task.title }} </td>
 		<td>
 
@@ -42,30 +30,15 @@
 		  </td>
 		<td> {{ task.hours }} </td>
 		<td class="buttons">
-
-	
-
 		<a href="{{ path('task_detail', {'id':task.id})  }}" class="btn-show">Ver</a>
-				{% if task.user.id == app.user.id %}
+				{% if task.user.id == app.user.id%}
 
 		<a href="{{ path('task_edit', {'id':task.id})  }}" class="btn-edit">Editar</a>
-
-				{%elseif app.user.role == 'ROLE_ADMIN'%}
-				
-			<a href="{{ path('task_edit', {'id':task.id})  }}" class="btn-edit">Editar</a>
-
-
 				{%endif%}
 
-				{% if app.user.role == 'ROLE_ADMIN' %}
+		{% if task.user.id == app.user.id%}
 		<a href="{{ path('task_delete', {'id':task.id})  }}" class="btn-delete">Eliminar </a>
-
-						{% elseif task.user.id == app.user.id %}
-		<a href="{{ path('task_delete', {'id':task.id})  }}" class="btn-delete">Eliminar </a>
-
 		{%endif%}
-
-
 				<td> 
 				
 		{% if task.estado == 1 %}

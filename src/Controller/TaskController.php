@@ -10,6 +10,9 @@ use App\Entity\User;
 use App\Form\TaskType;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
+
+
 class TaskController extends AbstractController
 {
 
@@ -72,7 +75,7 @@ public function creation(Request $request, UserInterface $user){
     public function myTasks(UserInterface $user){
         $tasks = $user->getTasks();
                 
-        return $this->render('task/my-tasks.html.twig',[
+        return $this->render('task/my-tasks-personal.html.twig',[
             'tasks' => $tasks 
         ]); 
     }
@@ -81,8 +84,9 @@ public function creation(Request $request, UserInterface $user){
 
     public function edit(Request $request, UserInterface $user, Task $task){
 
+//        if(!$user || $user->getId() !== $task->getUser()->getId() ){
 
-        if(!$user || $user->getId() !== $task->getUser()->getId()){
+        if(!$user ){
             return $this->redirectToRoute('tasks');
         }
 
@@ -112,7 +116,9 @@ public function creation(Request $request, UserInterface $user){
 
     public function delete(UserInterface $user, Task $task){
 
-                if(!$user || $user->getId() !== $task->getUser()->getId()){
+        //     if(!$user || $user->getId() !== $task->getUser()->getId()) {
+
+                if(!$user) {
             return $this->redirectToRoute('tasks');
         }
 
