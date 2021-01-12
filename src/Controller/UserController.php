@@ -35,6 +35,7 @@ use App\Form\Contacto;
 use App\Form\TaskType;
 
 
+
 class UserController extends AbstractController
 {
     /**
@@ -214,6 +215,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+
             $email = (new Email())
             ->from('contacto@webcaceres.com')
             ->to($user->getEmail())
@@ -222,8 +224,9 @@ class UserController extends AbstractController
             //->replyTo('fabien@example.com')
             //->priority(Email::PRIORITY_HIGH)
             ->subject('Contraseña Cambiada por el soporte informatico')
-            ->text('Contraseña Cambiada por soporte informatico')
+            ->text('Contraseña Cambiada por soporte informatico:')
             ->html('<p>Se ha cambiado su contraseña por soporte informática.</p>');
+
     
         $mailer->send($email);
 

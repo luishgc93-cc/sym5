@@ -24,6 +24,7 @@ security:
             pattern: ^/api
             anonymous: lazy
             provider: app_user_provider
+            stateless: true
             guard:
                 authenticators:
                     - App\Security\TokenAuthenticator            

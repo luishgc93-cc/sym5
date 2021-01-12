@@ -96,6 +96,15 @@
             "./config/packages/fos_rest.yaml"
         ]
     },
+    "knplabs/knp-components": {
+        "version": "v3.0.0"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.4.2"
+    },
+    "league/csv": {
+        "version": "9.6.2"
+    },
     "monolog/monolog": {
         "version": "1.25.5"
     },
