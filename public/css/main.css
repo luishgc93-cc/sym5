@@ -164,20 +164,20 @@ table td{
     background: #00AA33;
 }
 
-.pagination {
-    display: inline-block;
-  }
+.pagination{
+    font-size: 20px; 
+    text-align: center;
+}
   
   .pagination a {
+    text-align: center;
     color: black;
-    float: left;
     padding: 8px 16px;
-    text-decoration: none;
   }
 
-  .page{
-    color: rgb(165, 13, 13);
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;    
-  }
+  .current{
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    font-size: 25px;
+}
