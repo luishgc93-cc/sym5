@@ -41,10 +41,13 @@
 		<br><a href="{{ path('usuarios_delete', {'id':task.id})  }}" class="btn-delete">❎Eliminar </a>	<br>	
 
 	</tr>
+
 {% endfor %}
 
     </table>
 
+	<div class="pagination">  {{ knp_pagination_render(tasks) }} </div>
+ 
 </div>
 
 {% endblock %}

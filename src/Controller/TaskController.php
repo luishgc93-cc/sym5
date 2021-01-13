@@ -11,9 +11,6 @@ use App\Form\TaskType;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 
-use League\Csv\Reader;
-use League\Csv\Writer;
-
 class TaskController extends AbstractController
 {
 
@@ -27,13 +24,7 @@ class TaskController extends AbstractController
 
     	$task_repo2 = $this->getDoctrine()->getRepository(User::class);
         $tasks2 = $task_repo2->findBy([], ['id' =>'DESC']);
-
-
-
-
-
-        
-        
+      
         return $this->render('task/index.html.twig', [
             'tasks' => $tasks,
             'users' => $tasks2,

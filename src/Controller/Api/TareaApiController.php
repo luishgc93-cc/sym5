@@ -64,8 +64,6 @@ class TareaApiController extends AbstractFOSRestController
                return View::create('TAREA  BORRADA', Response::HTTP_BAD_REQUEST);
 
 
-
-
         
     }    
 }
