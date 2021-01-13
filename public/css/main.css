@@ -174,3 +174,10 @@ table td{
     padding: 8px 16px;
     text-decoration: none;
   }
+
+  .page{
+    color: rgb(165, 13, 13);
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;    
+  }
