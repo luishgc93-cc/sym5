@@ -37,7 +37,6 @@ use App\Form\TaskType;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Controller\EntityManagerInterface;
 
-
 class UserController extends AbstractController
 {
     /**
@@ -341,12 +340,6 @@ class UserController extends AbstractController
         'form' => $form->createView()
     ]);
 }
-
-
-
-
-
-
 
 
 }

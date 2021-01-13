@@ -83,7 +83,3 @@ MailerController:
     path: /email
     controller: App\Controller\MailerController::sendEmail
 
-
-
-
-

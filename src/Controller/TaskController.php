@@ -10,11 +10,12 @@ use App\Entity\User;
 use App\Form\TaskType;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use Knp\Component\Pager\PaginatorInterface;
 
 class TaskController extends AbstractController
 {
 
-    public function index()
+    public function index(  Request $request, PaginatorInterface $paginator)
     {
 
     	$em = $this->getDoctrine()->getManager();
@@ -24,6 +25,13 @@ class TaskController extends AbstractController
 
     	$task_repo2 = $this->getDoctrine()->getRepository(User::class);
         $tasks2 = $task_repo2->findBy([], ['id' =>'DESC']);
+
+
+        $tasks = $paginator->paginate(
+            $tasks, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );        
       
         return $this->render('task/index.html.twig', [
             'tasks' => $tasks,
