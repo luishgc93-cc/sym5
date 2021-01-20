@@ -9,6 +9,10 @@ task_detail:
 task_creation:
     path: /crear-tarea
     controller: App\Controller\TaskController::creation
+
+archivos:
+    path: /archivos/{id}
+    controller: App\Controller\TaskController::addFiles    
     
 my_tasks:
     path: /mis-tareas

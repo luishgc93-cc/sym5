@@ -12,6 +12,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 use Knp\Component\Pager\PaginatorInterface;
 
+use App\Entity\Adjuntos;
+use App\Form\ArchivoForm;
+use Symfony\Component\HttpFoundation\Response;
+
 class TaskController extends AbstractController
 {
 
@@ -68,7 +72,7 @@ public function creation(Request $request, UserInterface $user){
             $em->persist($task);
             $em->flush();
             
-            return $this->redirect($this->generateUrl('task_detail', ['id' => $task->getId()]));
+            return $this->redirect($this->generateUrl('archivos', ['id' => $task->getId()]));
         }
         
         return $this->render('task/creation.html.twig',[
@@ -141,6 +145,49 @@ public function creation(Request $request, UserInterface $user){
           return $this->redirectToRoute('tasks');
 
     }
+
+    public function addFiles(Request $request, Task $task) {
+
+        $adjuntos = new Adjuntos();
+        $form = $this->createForm(ArchivoForm::class);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+    
+            $attachments = $adjuntos->getFichero();
+    
+            if ($attachments) {
+                foreach($attachments as $attachment)
+                {
+                    $file = $attachment->getFichero();
+    
+                    var_dump($attachment);
+                    $filename = md5(uniqid()) . '.' .$file->guessExtension();
+    
+                    $file->move(
+                            $this->getParameter('upload_path'), $filename
+                    );
+                    var_dump($filename);
+                    $attachment->setFichero($filename);
+                }
+            }
+            $task->getId();
+            $adjuntos->setAdjuntos_Id($task);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($adjuntos);
+
+            $em->flush();
+    
+            return $this->redirectToRoute('task_detail', array('id' => $task->getId()));
+        }
+
+    
+        return $this->render('task/archivos.html.twig', array(
+                    'adjuntos' => $adjuntos,
+                    'form' => $form->createView(),
+        ));
+    }
+
 
 
 }

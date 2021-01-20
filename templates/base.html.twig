@@ -13,7 +13,7 @@
    <div id="header">
     		<h1>Tareas</h1>
     		<ul id="menu">
-    			<li> <a href="{{ path('tasks') }}">Inicio</a></li>
+    			<li> <a href="{{ path('tasks') }}">🏠Inicio</a></li>
                 {% if app.user %}
                 <li ><a  href="{{ path('my_tasks') }}">Mis Tareas</a> </li>
 
@@ -22,16 +22,16 @@
                 
                 
    		{% if app.user.role == 'ROLE_ADMIN'%}
-                    <li ><a  href="{{ path('usuarios') }}">Ver Usuarios</a> </li>
+                    <li ><a  href="{{ path('usuarios') }}"> Usuarios</a> </li>
 		{%endif%}             
                 
                 
                 
                 
 
-                        <li class="right"><a href="{{ path('logout') }}">Cerrar Sesion</a> </li>              
+                        <li class="right"><a href="{{ path('logout') }}"> Salir</a> </li>              
 
-                <li class="right"><a href="/modificar-perfil/{{app.user.id}}">Modificar Perfil </a> </li>
+                <li class="right"><a href="/modificar-perfil/{{app.user.id}}"> Perfil </a> </li>
 
 
                 {% else %}
@@ -43,7 +43,6 @@
 
 
     		</ul>
-
         {% for message in app.flashes('success') %}
             <div class="mensaje">
                 {{ message }}

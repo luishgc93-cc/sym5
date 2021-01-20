@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 07-01-2021 a las 12:00:06
+-- Tiempo de generación: 19-01-2021 a las 09:13:03
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.4.0
 
@@ -87,19 +87,39 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `priority` varchar(20) DEFAULT NULL,
   `hours` int(100) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
+  `estado` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_task_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `user_id`, `title`, `content`, `priority`, `hours`, `created_at`) VALUES
-(14, 21, 'fds', 'fsd', 'high', 2, '2021-01-07 10:57:57'),
-(15, 21, 'tarea para luis', 'tarea para luis', 'low', 2, '2021-01-07 11:23:54'),
-(16, 8, 'tarea para luis 2', 'tarea para luis 2', 'high', 2, '2021-01-07 11:24:51'),
-(17, 8, 'tarea para luis 3', 'dadas', 'high', 2222, '2021-01-07 11:25:31');
+INSERT INTO `tasks` (`id`, `user_id`, `title`, `content`, `priority`, `hours`, `created_at`, `estado`) VALUES
+(15, 21, 'tarea para luis', 'tarea para luis', 'low', 2, '2021-01-07 11:23:54', '2'),
+(16, 8, 'tarea para luis 2', 'tarea para luis 2', 'high', 666, '2021-01-07 11:24:51', '3'),
+(17, 8, 'tarea para luis 3', 'dadas', 'high', 2222, '2021-01-07 11:25:31', '4'),
+(18, 21, 'das', 'das', 'low', 22, '2021-01-07 12:31:57', '5'),
+(19, 21, 'para admin', 'para admin', 'high', 22, '2021-01-08 09:15:15', '1'),
+(20, 22, 'para pis', 'piss', 'high', 32, '2021-01-08 09:16:37', '1'),
+(21, 23, 'para homero', 'homero', 'high', 3, '2021-01-08 09:18:10', '1'),
+(23, 23, 'das', 'ads', 'high', 2, '2021-01-08 10:18:46', '1'),
+(24, 23, 'dasdas', 'das', 'high', 2, '2021-01-08 10:28:58', '1'),
+(27, 21, '22', 'asddas', 'high', 2, '2021-01-13 11:05:16', '1'),
+(28, 21, 'adsdas', 'dasdas', 'high', 22, '2021-01-13 11:05:22', '1'),
+(29, 21, 'dasdas', 'dasdas', 'high', 22, '2021-01-13 11:05:27', '1'),
+(30, 21, 'dasdas', 'dasdas', 'high', 22, '2021-01-13 11:05:33', '1'),
+(31, 21, 'adsdas', '2', 'high', 2, '2021-01-13 11:05:39', '1'),
+(32, 21, 'dasdsa', 'dasdas', 'high', 22, '2021-01-13 11:05:45', '1'),
+(33, 21, 'dsad', 'asdas', 'high', 22, '2021-01-13 11:05:51', '1'),
+(34, 21, 'dasdas', 'dasdsadas', 'high', 2, '2021-01-13 11:05:56', '1'),
+(35, 21, 'dasasd', 'dasda', 'high', 22, '2021-01-13 11:06:01', '1'),
+(36, 21, 'adsda', 'dasdas', 'high', 22, '2021-01-13 11:06:07', '1'),
+(37, 21, 'dasdas', 'dasdas', 'high', 22, '2021-01-13 11:06:12', '1'),
+(38, 21, 'dasd', 'asdasd', 'high', 22, '2021-01-13 11:06:17', '1'),
+(39, 21, 'sdf', 'sfdfsd', 'high', 3, '2021-01-18 09:30:24', '1'),
+(40, 21, 'sd', 'gf', 'high', 66, '2021-01-18 09:30:40', '5');
 
 -- --------------------------------------------------------
 
@@ -117,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `users`
@@ -131,7 +151,11 @@ INSERT INTO `users` (`id`, `role`, `name`, `surname`, `email`, `password`, `crea
 (12, 'ROLE_USER', 'carlos', 'carlos', 'carlos@gmail.com', '$2y$04$/aV7KX4OZuzZky/wLG4FZeIdit2lqcWXMh8NmjVxhz0rBKksOmV8W', '2021-01-04 16:00:25'),
 (14, 'ROLE_USER', 'pepe', 'pepe', 'pepe@gdaas.com', '$2y$04$Z8Zow6CWeAvQyUSS3pten.K1NFbXPXEO0aGTgUW3ekfZHILrm22le', '2021-01-04 16:22:04'),
 (15, 'ROLE_USER', 'pepepeepp', 'epepe', 'pepepepe@gmail.com', '$2y$04$7yeuAiOYobMG3Gi41ux7WeI8s.S4UJq2UCV8WPDGL0pl9abdOWf7e', '2021-01-05 10:00:38'),
-(21, 'ROLE_ADMIN', 'admin', 'admins', 'admin@admin.com', '$2y$04$ZJeRkvSs6EnUNsVJvwXo7ugg04e0QZPgBCttwHdeftv8pvKFu3bpa', '2021-01-07 08:49:22');
+(21, 'ROLE_ADMIN', 'admin', 'admins', 'admin@admin.com', '$2y$04$ZJeRkvSs6EnUNsVJvwXo7ugg04e0QZPgBCttwHdeftv8pvKFu3bpa', '2021-01-07 08:49:22'),
+(22, 'ROLE_USER', 'pis', 'pis', 'pis@gmail.com', '$2y$04$n.5dg2mf9fISL/oPIIAwVu5d2dvZoZR6xdRwuVm2kNeJNU3t3sBBK', '2021-01-08 09:16:13'),
+(23, 'ROLE_USER', 'Luis Homero', 'Gonzales Chavez', 'luishgc93@gmail.com', '$2y$04$Mfr3/oxBpDSSsCpa5kcgsOcPe7QuY/cKZwS81NbGcupKbXWcqwtN.', '2021-01-08 09:17:53'),
+(24, 'ROLE_USER', 'homer', 'homer', 'homer@gmail.com', '$2y$04$wt8YMwqqEkWSxJijo2ii/.mgmJ0O.Ryx0dqDZfk7cv.ONuq8Bic9a', '2021-01-08 10:33:24'),
+(25, 'ROLE_USER', 'piso', 'piso', 'piso@gmail.com', '$2y$04$LzOTvB.DScePGQ4FzzH0dOE6EKOc1HpCOIy1EKf9.MBlNDsPA9/vO', '2021-01-08 10:33:48');
 
 --
 -- Restricciones para tablas volcadas

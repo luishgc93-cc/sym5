@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class TaskType extends AbstractType{
     
@@ -25,7 +26,7 @@ class TaskType extends AbstractType{
                 'Baja' => 'low'
             )
         ))
-        ->add('hours', TextType::class, array(
+        ->add('hours', NumberType::class, array(
             'label' => 'Horas presupuestadas'
         ))
         ->add('estado', ChoiceType::class, array(

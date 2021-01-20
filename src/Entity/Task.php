@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -78,7 +80,17 @@ class Task
      *
      * @ORM\Column(name="user_id", type="string", nullable=true)
      */
-    private $user_id;        
+    private $user_id;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Adjuntos::class, mappedBy="adjuntos")
+     */
+    private $adjuntosid;
+
+    public function __construct()
+    {
+        $this->adjuntosid = new ArrayCollection();
+    }        
 
     public function getId(): ?int
     {
@@ -181,6 +193,49 @@ class Task
     public function setUser_Id(?string $user_id): self
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getUserId(): ?string
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?string $user_id): self
+    {
+        $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Adjuntos[]
+     */
+    public function getadjuntos_id(): Collection
+    {
+        return $this->adjuntos_id;
+    }
+
+    public function addadjuntos_id(Adjuntos_id $adjuntos_id): self
+    {
+        if (!$this->adjuntos_id->contains($adjuntos_id)) {
+            $this->adjuntos_id[] = $adjuntos_id;
+            $adjuntos_id->setAdjuntosid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeadjuntos_id(Adjuntos_id $adjuntos_id): self
+    {
+        if ($this->adjuntos_id->contains($adjuntos_id)) {
+            $this->adjuntos_id->removeElement($adjuntos_id);
+            // set the owning side to null (unless already changed)
+            if ($adjuntos_id->getAdjuntosid() === $this) {
+                $adjuntos_id->setAdjuntosid(null);
+            }
+        }
 
         return $this;
     }
