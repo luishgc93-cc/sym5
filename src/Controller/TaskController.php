@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 use Knp\Component\Pager\PaginatorInterface;
 
-use App\Entity\Adjuntos;
+use App\Entity\Adjunto;
 use App\Form\ArchivoForm;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -148,18 +148,18 @@ public function creation(Request $request, UserInterface $user){
 
     public function addFiles(Request $request, Task $task) {
 
-        $adjuntos = new Adjuntos();
+        $adjuntos = new Adjunto();
         $form = $this->createForm(ArchivoForm::class);
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
     
-            $attachments = $adjuntos->getFichero();
+           $attachments = $adjuntos;
     
             if ($attachments) {
                 foreach($attachments as $attachment)
                 {
-                    $file = $attachment->getFichero();
+                    $file = $attachment->getArchivo();
     
                     var_dump($attachment);
                     $filename = md5(uniqid()) . '.' .$file->guessExtension();
@@ -168,11 +168,12 @@ public function creation(Request $request, UserInterface $user){
                             $this->getParameter('upload_path'), $filename
                     );
                     var_dump($filename);
-                    $attachment->setFichero($filename);
+                    $attachment->setArchivo($filename);
                 }
+                
             }
             $task->getId();
-            $adjuntos->setAdjuntos_Id($task);
+            $adjuntos->setAdjunto($task);
             $em = $this->getDoctrine()->getManager();
             $em->persist($adjuntos);
 

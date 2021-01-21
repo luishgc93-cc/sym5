@@ -83,13 +83,13 @@ class Task
     private $user_id;
 
     /**
-     * @ORM\OneToMany(targetEntity=Adjuntos::class, mappedBy="adjuntos")
+     * @ORM\OneToMany(targetEntity=Adjunto::class, mappedBy="adjunto")
      */
-    private $adjuntosid;
+    private $adjunto;
 
     public function __construct()
     {
-        $this->adjuntosid = new ArrayCollection();
+        $this->adjunto = new ArrayCollection();
     }        
 
     public function getId(): ?int
@@ -197,43 +197,36 @@ class Task
         return $this;
     }
 
-    public function getUserId(): ?string
+    /**
+     * @return Collection|Adjunto[]
+     */
+    public function getAdjunto(): Collection
     {
-        return $this->user_id;
+        return $this->adjunto;
     }
-
-    public function setUserId(?string $user_id): self
+    public function setAdjunto(Adjunto $adjunto): self
     {
-        $this->user_id = $user_id;
+        $this->adjunto = $adjunto;
 
         return $this;
     }
-
-    /**
-     * @return Collection|Adjuntos[]
-     */
-    public function getadjuntos_id(): Collection
+    public function addAdjunto(Adjunto $adjunto): self
     {
-        return $this->adjuntos_id;
-    }
-
-    public function addadjuntos_id(Adjuntos_id $adjuntos_id): self
-    {
-        if (!$this->adjuntos_id->contains($adjuntos_id)) {
-            $this->adjuntos_id[] = $adjuntos_id;
-            $adjuntos_id->setAdjuntosid($this);
+        if (!$this->adjunto->contains($adjunto)) {
+            $this->adjunto[] = $adjunto;
+            $adjunto->setAdjunto($this);
         }
 
         return $this;
     }
 
-    public function removeadjuntos_id(Adjuntos_id $adjuntos_id): self
+    public function removeAdjunto(Adjunto $adjunto): self
     {
-        if ($this->adjuntos_id->contains($adjuntos_id)) {
-            $this->adjuntos_id->removeElement($adjuntos_id);
+        if ($this->adjunto->contains($adjunto)) {
+            $this->adjunto->removeElement($adjunto);
             // set the owning side to null (unless already changed)
-            if ($adjuntos_id->getAdjuntosid() === $this) {
-                $adjuntos_id->setAdjuntosid(null);
+            if ($adjunto->getAdjunto() === $this) {
+                $adjunto->setAdjunto(null);
             }
         }
 

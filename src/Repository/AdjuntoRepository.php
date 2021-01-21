@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Adjuntos;
+use App\Entity\Adjunto;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Adjuntos|null find($id, $lockMode = null, $lockVersion = null)
- * @method Adjuntos|null findOneBy(array $criteria, array $orderBy = null)
- * @method Adjuntos[]    findAll()
- * @method Adjuntos[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Adjunto|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Adjunto|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Adjunto[]    findAll()
+ * @method Adjunto[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AdjuntosRepository extends ServiceEntityRepository
+class AdjuntoRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Adjuntos::class);
+        parent::__construct($registry, Adjunto::class);
     }
 
     // /**
-    //  * @return Adjuntos[] Returns an array of Adjuntos objects
+    //  * @return Adjunto[] Returns an array of Adjunto objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class AdjuntosRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Adjuntos
+    public function findOneBySomeField($value): ?Adjunto
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.exampleField = :val')
