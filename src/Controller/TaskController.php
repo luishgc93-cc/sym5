@@ -154,12 +154,12 @@ public function creation(Request $request, UserInterface $user){
     
         if ($form->isSubmitted() && $form->isValid()) {
     
-           $attachments = $adjuntos;
+            $attachments = $adjuntos->getFichero();
     
             if ($attachments) {
                 foreach($attachments as $attachment)
                 {
-                    $file = $attachment->getArchivo();
+                    $file = $attachment->getFichero();
     
                     var_dump($attachment);
                     $filename = md5(uniqid()) . '.' .$file->guessExtension();
@@ -168,12 +168,14 @@ public function creation(Request $request, UserInterface $user){
                             $this->getParameter('upload_path'), $filename
                     );
                     var_dump($filename);
-                    $attachment->setArchivo($filename);
+                    $attachment->setFichero($filename);
                 }
-                
+                return $attachment;
             }
             $task->getId();
             $adjuntos->setAdjunto($task);
+            $adjuntos->setFichero($attachments);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($adjuntos);
 

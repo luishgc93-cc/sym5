@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class TaskType extends AbstractType{
     
@@ -15,7 +16,7 @@ class TaskType extends AbstractType{
         $builder->add('title', TextType::class, array(
             'label' => 'Titulo'
         ))
-        ->add('content', TextareaType::class, array(
+        ->add('content', CKEditorType::class, array(
             'label' => 'Contenido'
         ))
         ->add('priority', ChoiceType::class, array(

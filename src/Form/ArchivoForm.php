@@ -16,7 +16,7 @@ class ArchivoForm extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options) 
        {
         $builder
-            ->add('archivo', FileType::class, [
+            ->add('fichero', FileType::class, [
                 'multiple' => true,
                 'attr'     => [
                     'multiple' => 'multiple'

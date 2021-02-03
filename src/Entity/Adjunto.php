@@ -25,6 +25,13 @@ class Adjunto
      */
     private $adjunto;
 
+    /**
+     * @var \Fichero|null
+     *
+     * @ORM\Column(name="fichero", type="string", nullable=true)
+     */
+    private $fichero;    
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -41,4 +48,18 @@ class Adjunto
 
         return $this;
     }
+
+
+    public function getFichero(): ?string
+    {
+        return $this->fichero;
+    }
+
+    public function setFichero(?string $fichero): self
+    {
+        $this->fichero = $fichero;
+
+        return $this;
+    }
+
 }
